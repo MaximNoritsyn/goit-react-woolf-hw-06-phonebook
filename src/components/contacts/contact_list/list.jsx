@@ -9,9 +9,9 @@ export const ContactList = () => {
     
     const filteredContacts = () => {
         if (!contacts) {
-            return contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
+            return [];
         }
-        return contacts;
+        return contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
     }
 
     return (
