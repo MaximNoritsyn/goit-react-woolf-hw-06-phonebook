@@ -1,11 +1,15 @@
 import css from './form.module.css';
+import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid'
 import { useState } from 'react';
+import { addContact } from '../../store/contacts/slice';
 
-export const ContactForm = ({ fillContacts }) => {
+export const ContactForm = () => {
 
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
+
+    const dispatch = useDispatch()
 
     const setOptions = {
         name: setName,
@@ -34,7 +38,8 @@ export const ContactForm = ({ fillContacts }) => {
             name: name.trim(),
             number: number
         }
-        fillContacts(contact)
+        console.log(contact);
+        dispatch(addContact(contact))
 
         setName('')
         setNumber('')
