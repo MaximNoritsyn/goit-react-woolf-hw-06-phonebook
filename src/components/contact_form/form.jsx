@@ -38,7 +38,6 @@ export const ContactForm = () => {
             name: name.trim(),
             number: number
         }
-        console.log(contact);
         dispatch(addContact(contact))
 
         setName('')
