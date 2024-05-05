@@ -5,7 +5,7 @@ const contactsSlice = createSlice({
     initialState: {contacts: []},
     reducers: {
         deleteContact: (state, {payload}) => {
-            return state.contacts.filter(el => el.id !== payload)
+            state.contacts = state.contacts.filter(el => el.id !== payload)
         },
         addContact: (state, { payload }) => {
             state.contacts.push(payload);
