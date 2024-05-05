@@ -1,23 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import css from './list.module.css';
 import { ContactItem } from '../contact/item';
+import { useContacts, useFilter } from 'store/selectors';
 
 
 export const ContactList = () => {
 
-    const [contactList, setContactList] = useState([]);
-
-    const { contacts } = useSelector(state => state.contacts);
-    const { filter } = useSelector(state => state.filter);
+    const contacts = useContacts();
+    const filter = useFilter();
     
-    useEffect(() => {
-        setContactList(contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase())));
-    }, [contacts, filter]);
+    const filteredContacts = () => {
+        const normalizedFilter = filter.toLowerCase();
+        return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
+    }
 
     return (
-        <ul className={css.list}>
-            {contactList.map(contact => (<ContactItem key={contact.id} contact={contact}/>))}
+        <ul className={css.list }>
+            {filteredContacts().map(contact => (<ContactItem key={contact.id} contact={contact}/>))}
         </ul>
     );
 }
